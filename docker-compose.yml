@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  web:
+    image: nginx:1.15.3
+    volumes:
+    - ./sites/shop.conf:/etc/nginx/conf.d/shop.conf
+    ports:
+    - "8080:80"
+    environment:
+    - RUN_LEVEL:"test" 
+    depends_on:
+        - "php7"
+    links:
+        - "php7"
+    volumes_from:
+      - source    
+  php5:
+    image: php:5.6-fpm-alpine
+  php7: 
+    build: ./images/php/7.2
+    depends_on:
+        - redis
+        - mysql
+    links:
+        - "redis"
+        - "mysql"
+    volumes_from:
+      - source  
+  redis:
+    image: redis:4.0.11
+    ports:
+    - "6379:6379"  
+  mysql:
+    image: mysql:5.6.41
+    ports:
+    - "3307:3306"  
+  source:
+    image: alpine
+    volumes:
+      - ~/IdeaProjects/ecommerce:/www/servers/www.xin.la
