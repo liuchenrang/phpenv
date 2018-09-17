@@ -46,6 +46,5 @@ services:
   source:
     image: alpine
     volumes:
-      - ~/IdeaProjects/ecommerce:/www/servers/shop.la
+      - ~/IdeaProjects/ecommerce:/www/servers/www.xin.la
       - ~/IdeaProject/demo-php:/www/servers/test.la
-      - ~/IdeaProjects/LovelyTao:/www/servers/tao.la
