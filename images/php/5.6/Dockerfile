@@ -16,8 +16,8 @@ RUN set -xe && \
         tar xzf ${PWD}/phalcon-v1.3.4.tar.gz && \
         base=${PWD} && \
         cd  ${PWD}/cphalcon-phalcon-v1.3.4/build && \
-        ./install && \
-        cd ${base} && \
+        echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini && \
+        ./install && cd ${base} && \
         # Remove all temp files
         rm -r \
             ${PWD}/phalcon-v1.3.4.tar.gz \
