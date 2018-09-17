@@ -1,5 +1,5 @@
 # phpenv
-
+```shell
 ifconfig 
 
 ping 
@@ -8,3 +8,4 @@ tcpdump
     apt install tcpdump
 
  docker-compose exec  php5 /bin/bash
+ ```
