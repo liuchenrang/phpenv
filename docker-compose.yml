@@ -6,9 +6,7 @@ services:
     volumes:
     - ./sites/:/etc/nginx/conf.d/
     ports:
-    - "8080:80"
-    environment:
-     RUN_LEVEL: test
+    - "80:80"
     depends_on:
         - "php7"
     links:
@@ -25,6 +23,9 @@ services:
         - "mysql"
     volumes_from:
       - source  
+    privileged: true
+    environment:
+      - APPLICATION_ENV=development
   php7: 
     build: ./images/php/7.2
     depends_on:
@@ -35,6 +36,10 @@ services:
         - "mysql"
     volumes_from:
       - source  
+    privileged: true
+    environment:
+      APPLICATION_ENV: development
+
   redis:
     image: redis:4.0.11
     ports:

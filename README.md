@@ -16,6 +16,7 @@ pstack strace
     apt install gdb
 ps
     apt-get install --reinstall procps
-docker-compose exec  php5 /bin/bash
+#bash in service     
+docker-compose exec  serviceName /bin/bash
 
- ```
+```

@@ -1,8 +1,5 @@
 FROM php:5.6.38-fpm-stretch
 LABEL maintainer="xinghuo"
-ARG PHALCON_VERSION=1.3.4
-ARG PHALCON_EXT_PATH=php5/64bits
-
 RUN apt-get update \
     && apt-get install -y librabbitmq-dev  \
     && pecl install amqp-1.9.3  \
