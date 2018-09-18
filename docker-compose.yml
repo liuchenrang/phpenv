@@ -45,8 +45,12 @@ services:
     - "3307:3306"  
     environment:
       MYSQL_ROOT_PASSWORD: allgood
+    volumes_from:
+      - source  
   source:
     image: alpine
     volumes:
-      - ~/IdeaProjects/ecommerce:/www/servers/www.xin.la
-      - ~/IdeaProject/demo-php:/www/servers/test.la
+      - ~/IdeaProjects/ecommerce:/www/servers/shop.la
+      - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
+      - ~/IdeaProjects/demo-php:/www/servers/test.la
+      - ~/DockerVolumes/Mysql:/var/lib/mysql

@@ -12,6 +12,10 @@ ping
     apt-get install inetutils-ping
 tcpdump 
     apt install tcpdump
+pstack strace 
+    apt install gdb
+ps
+    apt-get install --reinstall procps
+docker-compose exec  php5 /bin/bash
 
- docker-compose exec  php5 /bin/bash
  ```
