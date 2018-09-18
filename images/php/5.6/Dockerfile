@@ -1,6 +1,8 @@
 FROM php:5.6.38-fpm-stretch
 LABEL maintainer="xinghuo"
 RUN apt-get update \
+    && apt-get install -y inetutils-ping \
+    && apt-get install -y --reinstall procps \
     && apt-get install -y librabbitmq-dev  \
     && pecl install amqp-1.9.3  \
     && pecl install xdebug-2.5.5 \
