@@ -8,8 +8,8 @@ RUN  apt-get update \
     && pecl install amqp-1.9.3  \
     && pecl install xdebug-2.6.0 \
     && pecl install redis-4.1.0 \
-    && docker-php-ext-enable amqp xdebug redis
-
+    && docker-php-ext-enable amqp xdebug redis \
+    && docker-php-ext-install pdo pdo_mysql
 RUN set -xe && \
         # Compile Phalcon
         curl -LO  --retry 3 https://github.com/phalcon/cphalcon/archive/v${PHALCON_VERSION}.tar.gz && \

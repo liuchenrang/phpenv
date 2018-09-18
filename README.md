@@ -1,5 +1,11 @@
 # phpenv
+# 新增扩展
+   - 需要重新build 单个service 测试 docker-compose build serviceName
+
 ```shell
+#更新仓库
+apt-get update 
+
 ifconfig 
 
 ping 

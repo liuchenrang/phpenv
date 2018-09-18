@@ -12,8 +12,10 @@ RUN apt-get update \
 
 RUN set -xe && \
         # Compile Phalcon
+        docker-php-ext-install pdo pdo_mysql && \
         curl -LO   https://github.com/phalcon/cphalcon/archive/phalcon-v1.3.4.tar.gz && \
         tar xzf ${PWD}/phalcon-v1.3.4.tar.gz && \
+ 
         base=${PWD} && \
         cd  ${PWD}/cphalcon-phalcon-v1.3.4/build && \
         echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini && \
