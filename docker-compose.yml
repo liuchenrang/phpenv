@@ -16,11 +16,14 @@ services:
   php5:
     build: ./images/php/5.6
     depends_on:
+        - openvpn
         - redis
         - mysql
     links:
         - "redis"
         - "mysql"
+    # network_mode: "service:openvpn"
+ 
     volumes_from:
       - source  
     privileged: true
@@ -29,6 +32,7 @@ services:
   php7: 
     build: ./images/php/7.2
     depends_on:
+        - openvpn
         - redis
         - mysql
     links:
@@ -49,9 +53,23 @@ services:
     ports:
     - "3307:3306"  
     environment:
-      MYSQL_ROOT_PASSWORD: allgood
+      MYSQL_ROOT_PASSWORD: dockersql
     volumes_from:
       - source  
+  openvpn:
+    image: ekristen/openvpn-client:latest
+    # volumes_from:
+    #   - source  
+    volumes:
+        - ~/DockerVolumes/Vpn:/vpn/
+    devices:
+        - /dev/net/tun
+    privileged: true
+    entrypoint:
+        - openvpn
+        - --config 
+        - /vpn/client.ovpn 
+        - --auth-nocache
   source:
     image: alpine
     volumes:
@@ -59,3 +77,5 @@ services:
       - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
       - ~/IdeaProjects/demo-php:/www/servers/test.la
       - ~/DockerVolumes/Mysql:/var/lib/mysql
+
+    
