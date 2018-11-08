@@ -21,6 +21,8 @@ services:
     links:
         - "redis"
         - "mysql"
+    # network_mode:my "service:openvpn"
+ 
     volumes_from:
       - source  
     privileged: true
@@ -49,13 +51,35 @@ services:
     ports:
     - "3307:3306"  
     environment:
-      MYSQL_ROOT_PASSWORD: allgood
+      MYSQL_ROOT_PASSWORD: dockersql
     volumes_from:
       - source  
+  rabbitmq:
+    image: rabbitmq:3.7.8-management
+    ports:
+        - 5671:5671  
+        - 5672:5672
+        - 4369:4369 
+        - 25672:25672 
+        - 15671:15671 
+        - 15672:15672
+  beanstalk:
+    image: schickling/beanstalkd:latest
+    ports:
+        - 11300:11300
+  php-redis-admin:
+    image: faktiva/php-redis-admin
+    ports:
+        - 18080:80
+    volumes:
+        - ./tools/php-redis-admin-config.php:/var/www/html/php-redis-admin/app/config/config.php
   source:
     image: alpine
     volumes:
       - ~/IdeaProjects/ecommerce:/www/servers/shop.la
       - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
       - ~/IdeaProjects/demo-php:/www/servers/test.la
+      - ./projects/test:/projects/test
       - ~/DockerVolumes/Mysql:/var/lib/mysql
+
+    

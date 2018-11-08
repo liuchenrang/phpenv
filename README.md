@@ -20,3 +20,12 @@ ps
 docker-compose exec  serviceName /bin/bash
 
 ```
+# redis 管理工具
+```shell
+docker cp php-redis-admin:/var/www/html/php-redis-admin/app/config/config.php .
+docker cp config.php php-redis-admin:/var/www/html/php-redis-admin/app/config/config.php
+docker run --link workerenv_redis_1  -p 18080:80 -d --name php-redis-admin faktiva/php-redis-admin\n
+```
+
+
+/usr/local/lib/php/
