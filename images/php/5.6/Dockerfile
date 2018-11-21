@@ -1,7 +1,9 @@
 FROM php:5.6.38-fpm-stretch
 LABEL maintainer="xinghuo"
 RUN apt-get update \
-    && apt-get install -y inetutils-ping \   
+    && apt-get install -y inetutils-ping \  
+    && apt-get install -y wget \   
+    && apt-get install -y vim \   
     && apt-get install -y pstack \
     && apt-get install -y strace \
     && apt-get install -y --reinstall procps \

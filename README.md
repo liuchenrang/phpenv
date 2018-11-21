@@ -5,9 +5,7 @@
 ```shell
 #更新仓库
 apt-get update 
-
 ifconfig 
-
 ping 
     apt-get install inetutils-ping
 tcpdump 
@@ -26,6 +24,5 @@ docker cp php-redis-admin:/var/www/html/php-redis-admin/app/config/config.php .
 docker cp config.php php-redis-admin:/var/www/html/php-redis-admin/app/config/config.php
 docker run --link workerenv_redis_1  -p 18080:80 -d --name php-redis-admin faktiva/php-redis-admin\n
 ```
-
-
-/usr/local/lib/php/
+#依赖说明
+- php

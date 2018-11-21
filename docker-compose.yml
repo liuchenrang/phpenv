@@ -18,9 +18,11 @@ services:
     depends_on:
         - redis
         - mysql
+        - memcached
     links:
         - "redis"
         - "mysql"
+        - "memcached"
     # network_mode:my "service:openvpn"
  
     volumes_from:
@@ -28,14 +30,17 @@ services:
     privileged: true
     environment:
       - APPLICATION_ENV=development
+      - DEVELOPMENT_REDIS_HOST=redis
   php7: 
     build: ./images/php/7.2
     depends_on:
         - redis
         - mysql
+        - memcached
     links:
         - "redis"
         - "mysql"
+        - 'memcached'
     volumes_from:
       - source  
     privileged: true
@@ -73,13 +78,18 @@ services:
         - 18080:80
     volumes:
         - ./tools/php-redis-admin-config.php:/var/www/html/php-redis-admin/app/config/config.php
+  memcached:
+    image: memcached:1.5.12-alpine
+    ports:
+        - 11211:11211
   source:
     image: alpine
     volumes:
       - ~/IdeaProjects/ecommerce:/www/servers/shop.la
       - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
       - ~/IdeaProjects/demo-php:/www/servers/test.la
-      - ./projects/test:/projects/test
+      - ~/IdeaProjects/spark:/www/servers/spark.la
+      - ~/IdeaProjects/taobao-item-spider:/www/servers/spider.la
+      - ./projects:/projects
       - ~/DockerVolumes/Mysql:/var/lib/mysql
-
-    
+      - ./dependency:/dependency
