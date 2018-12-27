@@ -23,8 +23,10 @@ services:
         - "redis"
         - "mysql"
         - "memcached"
-    # network_mode:my "service:openvpn"
- 
+    volumes:
+    - ./dependency/php/5.6/conf.d:/usr/local/etc/php/conf.d
+    - ./dependency/php/5.6/no-debug-non-zts:/usr/local/lib/php/extensions/no-debug-non-zts-20131226
+    - ./dependency/php/5.6/built/memcached/libmemcached:/usr/local/libmemcached
     volumes_from:
       - source  
     privileged: true
@@ -41,6 +43,9 @@ services:
         - "redis"
         - "mysql"
         - 'memcached'
+    volumes:
+    - ./dependency/php/7.2/conf.d:/usr/local/etc/php/conf.d
+    - ./dependency/php/7.2/no-debug-non-zts:/usr/local/lib/php/extensions/no-debug-non-zts-20170718
     volumes_from:
       - source  
     privileged: true
@@ -83,13 +88,17 @@ services:
     ports:
         - 11211:11211
   source:
-    image: alpine
-    volumes:
-      - ~/IdeaProjects/ecommerce:/www/servers/shop.la
-      - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
-      - ~/IdeaProjects/demo-php:/www/servers/test.la
-      - ~/IdeaProjects/spark:/www/servers/spark.la
-      - ~/IdeaProjects/taobao-item-spider:/www/servers/spider.la
-      - ./projects:/projects
-      - ~/DockerVolumes/Mysql:/var/lib/mysql
-      - ./dependency:/dependency
+      image: alpine
+      volumes:
+        - ~/IdeaProjects/ecommerce:/www/servers/shop.la
+        - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
+        - ~/IdeaProjects/demo-php:/www/servers/test.la
+        - ~/IdeaProjects/spark:/www/servers/spark.la
+        - ~/IdeaProjects/taobao-item-spider:/www/servers/spider.la
+        - ./projects:/projects
+        - ~/DockerVolumes/Mysql:/var/lib/mysql
+        - ./dependency:/dependencyx
+  # source:
+  #   extends:
+  #     file: composes/volume-base.yml
+  #     service: source
