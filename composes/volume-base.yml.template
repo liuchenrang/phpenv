@@ -1,0 +1,7 @@
+version: '2'
+services:
+  source:
+    image: alpine
+    volumes:
+      - ./volumes/Mysql:/var/lib/mysql
+      - ./dependency:/dependency

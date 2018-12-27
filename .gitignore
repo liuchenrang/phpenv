@@ -1,0 +1,4 @@
+projects/*
+sites/*.conf
+.DS_Store
+composes/volume-base.yml
