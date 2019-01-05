@@ -1,4 +1,6 @@
 # phpenv
+   - 初次使用安装 pip ， pip install docker-compose
+   - cd 到项目目录  docker-compose up -d 启动环境 
 # 新增扩展
    - 需要重新build 单个service 测试 docker-compose build serviceName
 
