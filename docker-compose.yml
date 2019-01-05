@@ -30,6 +30,8 @@ services:
     volumes_from:
       - source  
     privileged: true
+    ports:
+      - 9009:9009
     environment:
       - APPLICATION_ENV=development
       - DEVELOPMENT_REDIS_HOST=redis
