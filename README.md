@@ -28,3 +28,4 @@ docker run --link workerenv_redis_1  -p 18080:80 -d --name php-redis-admin fakti
 ```
 #依赖说明
 - php
+

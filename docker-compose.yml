@@ -96,10 +96,10 @@ services:
         - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
         - ~/IdeaProjects/demo-php:/www/servers/test.la
         - ~/IdeaProjects/spark:/www/servers/spark.la
+        - /Users/chen/Downloads/wecaht/fenxiao:/www/servers/fen.la
         - ~/IdeaProjects/taobao-item-spider:/www/servers/spider.la
         - ./projects:/projects
         - ~/DockerVolumes/Mysql:/var/lib/mysql
-        - ./dependency:/dependencyx
   # source:
   #   extends:
   #     file: composes/volume-base.yml
