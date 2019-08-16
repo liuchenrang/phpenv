@@ -16,6 +16,9 @@ pstack strace
     apt install gdb
 ps
     apt-get install --reinstall procps
+grpc 
+    apt install libzip-dev
+    pecl install grpc
 #bash in service     
 docker-compose exec  serviceName /bin/bash
 
