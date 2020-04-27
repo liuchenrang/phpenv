@@ -56,22 +56,29 @@ services:
     privileged: true
     environment:
       APPLICATION_ENV: development
+      LOGGER_LEVEL: DEBUG
       DEVELOPMENT_REDIS_HOST: redis
 
   redis:
     image: redis:4.0.11
     ports:
     - "6379:6379"  
+    - "16379:16379"  
+  redis2:
+    image: redis:4.0.11
+    ports:
+    - "26379:6379"  
   mysql:
-    image: mysql:5.6.41
+    image: mysql:5.7
     ports:
     - "3307:3306"  
     environment:
+      MYSQL_PASSWORD: dockersql
       MYSQL_ROOT_PASSWORD: dockersql
     volumes_from:
       - source  
   rabbitmq:
-    image: rabbitmq:3.7.8-management
+    build: ./images/rabbitmq
     ports:
         - 5671:5671  
         - 5672:5672
@@ -79,16 +86,23 @@ services:
         - 25672:25672 
         - 15671:15671 
         - 15672:15672
+        - 1883:1883
+        - 8883:8883
   beanstalk:
     image: schickling/beanstalkd:latest
     ports:
         - 11300:11300
+  memcached:
+    image: memcached:1.5.19-alpine
+    ports:
+        - 11211:11211
   php-redis-admin:
-    image: faktiva/php-redis-admin
+    image: erikdubbelboer/phpredisadmin:latest
     ports:
         - 18080:80
-    volumes:
-        - ./tools/php-redis-admin-config.php:/var/www/html/php-redis-admin/app/config/config.php
+    environment:
+       REDIS_1_HOST: redis
+       REDIS_1_NAME: myredis
   memcached:
     image: memcached:1.5.12-alpine
     ports:
@@ -98,14 +112,16 @@ services:
       volumes:
         - ~/IdeaProjects/ecommerce:/www/servers/shop.la
         - ~/IdeaProjects/LovelyTao:/www/servers/tao.la   
-        - ~/IdeaProjects/demo-php:/www/servers/test.la
+        - ./projects/demo:/www/servers/test.la
         - ~/IdeaProjects/spark:/www/servers/spark.la
         - ~/IdeaProjects/taobao-item-spider:/www/servers/spider.la
         - ./projects:/projects
         - ~/DockerVolumes/Mysql:/var/lib/mysql
         - /Users/chen/IdeaProjects/TbkOrder:/www/TbkOrder
         - /Users/chen/IdeaProjects/FxService:/www/FxService
+        - /Users/chen/IdeaProjects/PhalconRpc:/www/PhalconRpc
         - /Users/chen/IdeaProjects/WorkerEnv/tools/composer:/usr/local/bin/composer
+        - /Users/chen/IdeaProjects:/IdeaProjects
         
   # source:
   #   extends:
