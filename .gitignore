@@ -4,3 +4,8 @@ sites/*.conf
 composes/volume-base.yml
 
 /vendor/
+dubbo-client/
+.idea
+.vscode/
+images/rabbitmq/
+.history/
